@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Permite que la página se adapte al ancho de celulares y tabletas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rock and Food: combos, hamburguesas y favoritos con estilo retro diner.">
+  <title>Rock and Food | Diner 80s</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ==================== NAVEGACIÓN ====================
+       Los seis espacios se controlan con CSS Grid.
+       Cambia assets/logo.png y los iconos por tus imágenes.
+  -->
+  <header class="site-header" id="inicio">
+    <nav class="navbar" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="Rock and Food, inicio">
+        <img src="/iconos/logo-14.png" alt="Rock and Food">
+      </a>
+
+      <a class="nav-item" href="#menu" aria-label="Ir al menú">
+        <img src="/iconos/menu.png" alt="" class="nav-icon">
+        <span>MENÚ</span>
+      </a>
+
+      <a class="nav-item" href="#reserva" aria-label="Ir a reservas">
+        <img src="/iconos/reserva.png" alt="" class="nav-icon">
+        <span>RESERVA</span>
+      </a>
+
+      <a class="nav-item" href="#usuario" aria-label="Área de usuario">
+        <img src="/iconos/usuario.png" alt="" class="nav-icon">
+        <span>USUARIO</span>
+      </a>
+
+      <!-- La búsqueda ocupa un espacio amplio en la navegación -->
+      <form class="search-form" role="search" action="#menu">
+        <label class="visually-hidden" for="site-search">Buscar productos</label>
+        <input id="site-search" type="search" placeholder="Buscar..." autocomplete="off">
+        <button type="submit" aria-label="Buscar">
+          <img src="/iconos/lupa-13.png" alt="">
+        </button>
+      </form>
+
+      <a class="nav-item cart-link" href="#favoritos" aria-label="Ir a comprar">
+        <img src="/iconos/carrito.png" alt="" class="nav-icon">
+        <span>COMPRAR</span>
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==================== BANNER PRINCIPAL ====================
+         Reemplaza assets/fondo-banner.jpg por tu fondo.
+      
+         La imagen del combo se encuentra separada para que puedas cambiarla.
+         <section class="hero" id="menu" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <img class="ghost-art" src="assets/mascota-fantasma.png" alt="Fantasma de Rock and Food">
+        <div class="hero-copy">
+          <p class="hero-kicker">COMBO</p>
+          <h1 id="hero-title">MONSTRUOSO</h1>
+          <p class="hero-description">
+            Hamburguesa grande, papas medianas y naranja mediana.
+            ¡La combinación que hará temblar tu hambre!
+          </p>
+          <a class="pill-button" href="#favoritos">QUIERO MI COMBO</a>
+        </div>
+        <img class="hero-product" src="assets/combo-monstruoso.png" alt="Combo de hamburguesa, papas y bebida">
+      </div>
+    </section>
+
+    -->
+    <section class="hero" id="menu" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <img class="ghost-art" src="/imagenes/fantasmita-16.png" alt="Fantasma de Rock and Food">
+        <audio src="/Audio/hallowen.mp3"></audio>
+          <div class="hero-copy">
+            <p class="hero-kicker">COMBO</p>
+              <h1 id="hero-title">MONSTRUOSO</h1>
+            <p class="hero-description">
+              Hamburguesa grande, papas medianas y naranja mediana.
+              ¡La combinación que hará temblar tu hambre!
+            </p>
+            <a class="pill-button" href="#favoritos">QUIERO MI COMBO</a>
+          </div>
+        <img class="hero-product" src="/imagenes/bannerham.png" alt="Combo de hamburguesa, papas y bebida">
+      </div>
+    </section>
+
+    <!-- Franja decorativa: usa tu propia imagen de cuadros -->
+    <div class="checker-strip" aria-hidden="true"></div>
+
+    <!-- ==================== INFORMACIÓN DEL DINER ==================== -->
+    <section class="diner-section" id="reserva">
+      <h2 class="section-title">DINER 80S</h2>
+
+      <div class="diner-layout">
+        <div class="diner-photo-frame">
+          <img src="/imagenes/edificio-17.jpg" alt="Fachada de un restaurante diner retro">
+        </div>
+
+        <div class="contact-details">
+          <a class="detail-item" href="#horarios">
+            <span class="detail-icon"><img src="/iconos/reloj.png" alt=""></span>
+            <span class="detail-copy">
+              <strong id="horarios">Horarios de atención</strong>
+              <span>Lunes a viernes 9 a. m. a 8 p. m.</span>
+              <span>Sábados 12 a. m. a 6 p. m.</span>
+            </span>
+          </a>
+
+          <a class="detail-item" href="https://maps.google.com/?q=Calle+51+sur+48-7+Bogota" target="_blank" rel="noopener noreferrer">
+            <span class="detail-icon"><img src="/iconos/ubicacion.png" alt=""></span>
+            <span class="detail-copy">
+              <strong>Ubicación</strong>
+              <span>Calle 51 sur #48-7, 18.</span>
+              <span>Colombia - Bogotá.</span>
+            </span>
+          </a>
+
+          <a class="detail-item" href="tel:+57300300300">
+            <span class="detail-icon"><img src="/iconos/telefono-12.png" alt=""></span>
+            <span class="detail-copy">
+              <strong>Teléfono</strong>
+              <span>300300300</span>
+              <span>+57 312 339 1929</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Disco decorativo fijo a un lado. Reemplaza la imagen por tu disco -->
+    <div class="vinyl-wrap" aria-label="Disco decorativo">
+      <img class="vinyl-record" src="/iconos/Disco-15.png" alt="">
+    </div>
+
+    <!-- Segunda franja de cuadros y título superpuesto -->
+    <section class="favorites-section" id="favoritos" aria-labelledby="favorites-title">
+      <div class="favorites-heading">
+        <div class="checker-strip checker-strip-heading" aria-hidden="true"></div>
+        <h2 id="favorites-title">Nuestros favoritos</h2>
+      </div>
+
+      <!-- JavaScript cambia las tarjetas visibles al presionar las flechas -->
+      <div class="carousel-shell">
+        <button class="carousel-arrow previous" type="button" aria-label="Ver productos anteriores">
+          <span aria-hidden="true">←</span>
+        </button>
+
+        <div class="favorites-track-window">
+          <div class="favorites-track">
+            <!-- Cada tarjeta puede duplicarse para agregar más productos -->
+            <article class="product-card">
+              <img class="product-image" src="assets/hamburguesa-1.png" alt="Hamburguesa con papas y bebida">
+              <div class="product-card-content">
+                <h3>Hamburguesa sencilla</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+                <a class="buy-button" href="#comprar">Comprar</a>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <img class="product-image" src="assets/hamburguesa-2.png" alt="Hamburguesa con papas y bebida">
+              <div class="product-card-content">
+                <h3>Hamburguesa sencilla</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat.</p>
+                <a class="buy-button" href="#comprar">Comprar</a>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <img class="product-image" src="assets/hamburguesa-3.png" alt="Hamburguesa especial con papas y bebida">
+              <div class="product-card-content">
+                <h3>Combo especial</h3>
+                <p>Una combinación retro para disfrutar tu hamburguesa favorita con papas crujientes y bebida.</p>
+                <a class="buy-button" href="#comprar">Comprar</a>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <img class="product-image" src="assets/hamburguesa-4.png" alt="Combo doble con papas y bebida">
+              <div class="product-card-content">
+                <h3>Combo doble</h3>
+                <p>Más sabor, más diversión y todo el estilo de nuestro diner en un solo combo.</p>
+                <a class="buy-button" href="#comprar">Comprar</a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <button class="carousel-arrow next" type="button" aria-label="Ver siguientes productos">
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ====================
+       Los enlaces internos hacen scroll a las secciones de la página.
+       Cambia los enlaces de redes sociales por las URL reales de tu negocio.
+  -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-brand">
+      <a href="#inicio" aria-label="Volver al inicio">
+        <img src="assets/logo-footer.png" alt="Rock and Food">
+      </a>
+    </div>
+
+    <div class="footer-column">
+      <h2>Encuéntranos</h2>
+      <a href="#reserva">Dirección del restaurante</a>
+      <a href="#horarios">Horarios de atención</a>
+      <a href="tel:+57300300300">Teléfono o WhatsApp</a>
+      <a href="https://maps.google.com/?q=Bogota" target="_blank" rel="noopener noreferrer">Enlace a Google Maps</a>
+    </div>
+
+    <div class="footer-column">
+      <h2>Explora nuestro menú</h2>
+      <a href="#menu">Menú principal</a>
+      <a href="#favoritos">Nuestros favoritos</a>
+      <a href="#favoritos">Combos</a>
+      <a href="#favoritos">Hamburguesas</a>
+    </div>
+
+    <div class="footer-column" id="usuario">
+      <h2>Servicio al cliente</h2>
+      <a href="#footer">Preguntas frecuentes</a>
+      <a href="#reserva">Domicilios y cobertura</a>
+      <a href="#footer">Métodos de pago</a>
+    </div>
+
+    <div class="footer-column social-column">
+      <h2>Síguenos</h2>
+      <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href="#" target="_blank" rel="noopener noreferrer">TikTok</a>
+      <a href="#" target="_blank" rel="noopener noreferrer">YouTube</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

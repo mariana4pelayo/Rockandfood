@@ -1,0 +1,576 @@
+/* ==========================================================
+   ROCK AND FOOD — HOJA DE ESTILOS
+   Los comentarios indican qué puedes modificar.
+   Colores principales tomados de la referencia:
+   mostaza #e4b746, rojo #a30e12 y crema #fffaf0.
+   ========================================================== */
+
+/*tipografia*/
+
+@import url('https://fonts.googleapis.com/css2?family=Modak&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.modak-regular {
+  font-family: "Modak", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+// <weight>: Use a value from 100 to 900
+// <uniquifier>: Use a unique and descriptive class name
+.montserrat-lith {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: italic;
+}
+:root {
+  --mustard: #e4b746;
+  --red: #a30e12;
+  --deep-red: #8f0c10;
+  --cream: #fffaf0;
+  --ink: #3b1512;
+  --content-width: 1120px;
+  --page-gutter: clamp(18px, 5vw, 72px);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth; /* Desplazamiento suave al pulsar enlaces del footer */
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif; /* Cambia aquí la tipografía general */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a { color: inherit; text-decoration: none; }
+
+button, input { font: inherit; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==================== 1. NAVEGACIÓN ====================
+   Las seis columnas son: logo, menú, reserva, usuario,
+   búsqueda ancha y carrito. Ajusta grid-template-columns
+   si necesitas cambiar el espacio de cada elemento.
+*/
+.site-header {
+  position: relative;
+  z-index: 20;
+  background: var(--mustard);
+}
+
+.navbar {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px clamp(18px, 4.5vw, 52px);
+  display: grid;
+  grid-template-columns: minmax(150px, 1.7fr) repeat(3, minmax(70px, .75fr)) minmax(150px, 1.7fr) minmax(70px, .7fr);
+  align-items: center;
+  gap: clamp(10px, 2vw, 28px);
+}
+
+.brand { display: flex; align-items: center; }
+.brand img { width: min(100%, 150px); max-height: 76px; object-fit: contain; }
+
+.nav-item {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 900;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.nav-icon {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  /* Si tus iconos son PNG de un solo color, este filtro los vuelve rojos.
+     Para iconos ya rojos, elimina esta propiedad si altera sus colores. */
+  transition: filter .2s ease, transform .2s ease;
+}
+
+.nav-item:hover,
+.nav-item:focus-visible {
+  color: #fff3d0;
+  transform: translateY(-2px);
+}
+
+/* Efecto de inversión/contraste al pasar el cursor por los iconos */
+.nav-item:hover .nav-icon,
+.nav-item:focus-visible .nav-icon {
+  filter: brightness(0) invert(1);
+}
+
+.search-form {
+  min-width: 0;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--red);
+}
+
+.search-form input {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 12px 6px 16px;
+  color: white;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.search-form input::placeholder { color: transparent; }
+.search-form button {
+  width: 42px;
+  height: 100%;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.search-form button img { width: 23px; height: 23px; object-fit: contain; }
+.search-form:focus-within { outline: 2px solid var(--cream); }
+
+/* ==================== 2. BANNER PRINCIPAL ====================
+Reemplaza la ruta de background-image por tu imagen de fondo.
+*/
+.hero {
+  min-height: 330px;
+  color: var(--red);
+  background-color: #a8a4a4;
+  background-image: url("/imagenes/n.pngfondo\ baner-23.png"); /* TU FONDO */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  opacity: 95% ;
+}
+
+.hero-content {
+  max-width: 1440px;
+  min-height: 330px;
+  margin: 0 auto;
+  padding: 22px clamp(20px, 4vw, 55px);
+  display: grid;
+  grid-template-columns: minmax(105px, .65fr) minmax(250px, 1.45fr) minmax(240px, 1.35fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.ghost-art {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+}
+
+.hero-copy { position: relative; z-index: 1; }
+.hero-kicker {
+  margin: 0;
+  color: var(--mustard);
+  font-size: clamp(44px, 6vw, 78px);
+  line-height: .82;
+  font-weight: 1000;
+  letter-spacing: -2px;
+}
+.hero-copy h1 {
+  margin: 3px 0 7px;
+  color: var(--red);
+  font-size: clamp(24px, 3.4vw, 43px);
+  line-height: .95;
+  font-weight: 1000;
+  text-transform: uppercase;
+}
+.hero-description {
+  max-width: 330px;
+  margin: 0 0 22px;
+  color: var(--cream);
+  font-size: clamp(13px, 1.3vw, 17px);
+  line-height: 1.05;
+}
+.pill-button, .buy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 26px;
+  color: var(--red);
+  background: var(--mustard);
+  font-weight: 900;
+  text-align: center;
+  transition: transform .2s ease, background-color .2s ease;
+}
+.pill-button { margin-top: 3px; font-size: clamp(14px, 1.7vw, 21px); }
+.pill-button:hover, .buy-button:hover { transform: translateY(-3px); background: #f2cd68; }
+.hero-product {
+  justify-self: center;
+  align-self: end;
+  width: 125%;          /* Aumenta el tamaño respecto a su columna */
+  max-width: 600px;     /* Permite que crezca más en computador */
+  max-height: 430px;    /* Controla su altura máxima */
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+/* ==================== FRANJA DE CUADROS ====================
+   Usa tu archivo de cuadros. Cambia el alto si lo necesitas.
+*/
+.checker-strip {
+  width: 100%;
+  height: 52px;
+  background-image: url("assets/cuadros.png"); /* TU IMAGEN DE CUADROS */
+  background-position: center;
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+}
+
+/* ==================== 3. DINER 80S ==================== */
+.diner-section {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 55px var(--page-gutter) 35px;
+}
+
+.section-title {
+  margin: 0 0 42px;
+  color: var(--mustard);
+  font-size: clamp(42px, 6vw, 66px);
+  font-weight: 1000;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+.diner-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(250px, .9fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 48px);
+}
+
+.diner-photo-frame {
+  padding: 8px;
+  border-radius: 42px;
+  background: linear-gradient(135deg, #a9b0b9, #fff, #8bcbd0, #9aa4ad);
+  aspect-ratio: 1.12 / .88;
+}
+.diner-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 34px;
+}
+
+.contact-details { display: grid; gap: 28px; }
+.detail-item {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+.detail-icon {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  border-radius: 50%;
+  background: var(--mustard);
+  transition: background-color .2s ease, transform .2s ease;
+}
+.detail-icon img { width: 100%; height: 100%; object-fit: contain; }
+.detail-item:hover .detail-icon,
+.detail-item:focus-visible .detail-icon {
+  background: var(--red);
+  transform: scale(1.06);
+}
+.detail-copy { display: flex; flex-direction: column; gap: 3px; font-size: 14px; line-height: 1.15; }
+.detail-copy strong { margin-bottom: 3px; color: var(--red); font-size: 17px; font-weight: 900; }
+
+/* ==================== 4. DISCO GIRATORIO ====================
+   El disco queda fijo a la izquierda como en la referencia.
+   Al pasar el cursor: aumenta ligeramente y se detiene.
+*/
+.vinyl-wrap {
+  position: fixed;
+  z-index: 8;
+  left: -55px;
+  bottom: 9%;
+  width: 135px;
+  pointer-events: none; /* El disco decorativo no bloquea botones */
+}
+.vinyl-record {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  animation: vinyl-spin 12s linear infinite;
+  transform-origin: center;
+  pointer-events: auto;
+  transition: scale .3s ease;
+}
+.vinyl-record:hover {
+  scale: 1.1;
+  animation-play-state: paused;
+}
+@keyframes vinyl-spin { to { transform: rotate(360deg); } }
+
+/* ==================== 5. FAVORITOS / CARRUSEL ==================== */
+.favorites-section {
+  padding: 0 var(--page-gutter) 105px;
+  overflow: hidden;
+}
+.favorites-heading {
+  position: relative;
+  min-height: 62px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 38px;
+}
+.checker-strip-heading {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.favorites-heading h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0 12px;
+  color: var(--red);
+  font-size: clamp(30px, 4.3vw, 47px);
+  line-height: 1.1;
+  font-weight: 1000;
+  text-align: center;
+}
+
+.carousel-shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) 54px;
+  align-items: center;
+  gap: 14px;
+}
+.favorites-track-window { min-width: 0; overflow: hidden; }
+.favorites-track {
+  display: grid;
+  grid-auto-columns: calc((100% - 22px) / 2);
+  grid-auto-flow: column;
+  gap: 22px;
+  transition: transform .5s ease;
+  will-change: transform;
+}
+.product-card {
+  position: relative;
+  min-width: 0;
+  min-height: 310px;
+  margin-top: 32px;
+  padding: 115px 18px 18px;
+  border: 8px solid #aeb7bf;
+  border-radius: 42px;
+  background: var(--red) url("assets/fondo-tarjeta.jpg") center / cover no-repeat;
+  color: var(--cream);
+}
+.product-image {
+  position: absolute;
+  z-index: 2;
+  top: -60px;
+  left: 50%;
+  width: 88%;
+  height: 155px;
+  object-fit: contain;
+  transform: translateX(-50%);
+}
+.product-card-content h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 900;
+  text-transform: none;
+}
+.product-card-content p {
+  margin: 0;
+  color: #e8c36a;
+  font-size: 13px;
+  line-height: 1.1;
+}
+.buy-button {
+  position: relative;
+  left: 50%;
+  min-width: 60%;
+  margin-top: 12px;
+  padding: 13px 24px;
+  border-radius: 10px;
+  transform: translateX(-50%);
+  font-size: 17px;
+}
+.buy-button:hover { transform: translateX(-50%) translateY(-3px); }
+.carousel-arrow {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: var(--red);
+  background: var(--mustard);
+  cursor: pointer;
+  transition: transform .2s ease, background-color .2s ease;
+}
+.carousel-arrow span { font-size: 35px; font-weight: 900; line-height: 1; }
+.carousel-arrow:hover { transform: scale(1.08); background: #f2cd68; }
+.carousel-arrow:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid #262626; outline-offset: 3px; }
+
+/* ==================== 6. FOOTER ==================== */
+.site-footer {
+  min-height: 290px;
+  padding: 54px clamp(20px, 4vw, 50px);
+  display: grid;
+  grid-template-columns: minmax(145px, 1.4fr) repeat(4, minmax(100px, 1fr));
+  align-items: center;
+  gap: clamp(18px, 3vw, 38px);
+  color: #fff;
+  background: var(--red);
+}
+.footer-brand img { width: min(100%, 190px); max-height: 100px; object-fit: contain; }
+.footer-column { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.footer-column h2 { margin: 0 0 8px; font-size: 11px; font-weight: 900; }
+.footer-column a { font-size: 10px; line-height: 1.25; transition: color .2s ease; }
+.footer-column a:hover { color: var(--mustard); text-decoration: underline; }
+
+/* ==================== RESPONSIVE: TABLETAS ==================== */
+@media (max-width: 900px) {
+  .navbar {
+    grid-template-columns: minmax(120px, 1.3fr) repeat(3, minmax(55px, .65fr)) minmax(110px, 1.2fr) minmax(60px, .6fr);
+    gap: 10px;
+    padding-inline: 18px;
+  }
+  .brand img { max-height: 62px; }
+  .nav-icon { width: 29px; height: 29px; }
+  .nav-item { font-size: 10px; }
+  .hero-content {
+    grid-template-columns: minmax(80px, .55fr) minmax(220px, 1.3fr) minmax(180px, 1fr);
+    padding-inline: 22px;
+  }
+  .diner-layout { gap: 24px; }
+  .detail-item { grid-template-columns: 58px minmax(0, 1fr); gap: 12px; }
+  .detail-icon { width: 56px; height: 56px; }
+  .detail-copy { font-size: 12px; }
+  .detail-copy strong { font-size: 15px; }
+  .site-footer { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; }
+  .footer-brand img { width: 145px; }
+}
+
+/* ==================== RESPONSIVE: CELULARES ==================== */
+@media (max-width: 620px) {
+  html { scroll-padding-top: 10px; }
+  .navbar {
+    min-height: auto;
+    padding: 12px 14px;
+    grid-template-columns: 1.25fr repeat(4, minmax(42px, .55fr));
+    gap: 9px;
+  }
+  .brand { grid-column: 1 / 2; grid-row: 1; }
+  .brand img { width: 118px; max-height: 52px; }
+  .nav-item { font-size: 9px; gap: 3px; }
+  .nav-icon { width: 25px; height: 25px; }
+  .search-form {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: 34px;
+  }
+  .search-form input::placeholder { color: rgba(255,255,255,.8); }
+  .cart-link { grid-column: 5 / 6; grid-row: 1; }
+  .hero, .hero-content { min-height: 0; }
+  .hero-content {
+    padding: 22px 18px 18px;
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .ghost-art { max-height: 135px; }
+  .hero-copy { grid-column: 2; grid-row: 1; }
+  .hero-kicker { font-size: clamp(40px, 12vw, 58px); }
+  .hero-copy h1 { font-size: clamp(21px, 6vw, 30px); }
+  .hero-description { font-size: 12px; margin-bottom: 12px; }
+  .pill-button { padding: 10px 16px; font-size: 13px; }
+  .hero-product {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: min(78%, 300px);
+    max-height: 190px;
+    justify-self: end;
+    margin-top: 8px;
+  }
+  .checker-strip { height: 30px; background-size: auto 100%; }
+  .diner-section { padding: 38px 20px 25px; }
+  .section-title { margin-bottom: 24px; font-size: clamp(38px, 11vw, 52px); }
+  .diner-layout { grid-template-columns: 1fr; gap: 24px; }
+  .diner-photo-frame { aspect-ratio: 1.15 / .9; border-radius: 30px; }
+  .diner-photo-frame img { border-radius: 23px; }
+  .contact-details { gap: 18px; }
+  .detail-item { grid-template-columns: 58px minmax(0, 1fr); }
+  .detail-icon { width: 54px; height: 54px; }
+  .detail-copy { font-size: 13px; }
+  .detail-copy strong { font-size: 16px; }
+  .vinyl-wrap { width: 75px; left: -38px; bottom: 8%; opacity: .9; }
+  .favorites-section { padding: 0 14px 60px; }
+  .favorites-heading { min-height: 46px; margin-bottom: 20px; }
+  .favorites-heading h2 { font-size: clamp(25px, 7vw, 34px); }
+  .carousel-shell { grid-template-columns: 36px minmax(0, 1fr) 36px; gap: 6px; }
+  .carousel-arrow { width: 36px; height: 36px; }
+  .carousel-arrow span { font-size: 27px; }
+  .favorites-track { grid-auto-columns: 100%; gap: 0; }
+  .product-card { min-height: 300px; margin-top: 38px; padding: 110px 16px 18px; border-width: 6px; border-radius: 32px; }
+  .product-image { top: -58px; height: 150px; }
+  .product-card-content h3 { font-size: 15px; }
+  .product-card-content p { font-size: 12px; }
+  .buy-button { min-width: 65%; font-size: 16px; }
+  .site-footer {
+    padding: 38px 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+  .footer-brand { grid-column: 1 / -1; display: flex; justify-content: center; }
+  .footer-brand img { width: 160px; }
+  .footer-column h2 { font-size: 12px; }
+  .footer-column a { font-size: 11px; }
+  .social-column { grid-column: 1 / -1; }
+}
+
+/* Respeta la preferencia de usuarios que reducen animaciones */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

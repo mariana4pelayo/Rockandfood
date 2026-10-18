@@ -1,0 +1,37 @@
+ROCK AND FOOD — ARCHIVOS DE LA PÁGINA
+
+ARCHIVOS
+- index.html: estructura y textos de la página.
+- styles.css: colores, tamaños, distribución, efectos hover y adaptación a celular.
+- script.js: carrusel de favoritos y búsqueda sencilla.
+- assets/: coloca aquí tus imágenes.
+
+IMÁGENES QUE DEBES AGREGAR A assets/
+logo.png
+logo-footer.png
+icono-menu.png
+icono-reserva.png
+icono-usuario.png
+icono-busqueda.png
+icono-carrito.png
+fondo-banner.jpg
+mascota-fantasma.png
+combo-monstruoso.png
+cuadros.png
+diner-80s.jpg
+icono-horario.png
+icono-ubicacion.png
+icono-telefono.png
+disco.png
+fondo-tarjeta.jpg
+hamburguesa-1.png
+hamburguesa-2.png
+hamburguesa-3.png
+hamburguesa-4.png
+
+IMPORTANTE
+1. Usa los nombres exactos anteriores o cambia las rutas en index.html y styles.css.
+2. Para que los iconos cambien a blanco al pasar el cursor, funcionan mejor PNG transparentes de un solo color. Si no quieres ese efecto, elimina el filtro indicado en styles.css.
+3. Los enlaces de redes sociales del footer tienen href="#" de ejemplo: reemplázalos por los enlaces reales.
+4. Los datos de dirección, horarios y teléfonos son los que aparecen en el diseño de referencia; revisa que sean correctos antes de publicar.
+5. Abre index.html en tu navegador para probar. Para trabajar cómodamente puedes abrir la carpeta en Visual Studio Code y usar Live Server.
