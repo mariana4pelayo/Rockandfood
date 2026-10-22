@@ -1,0 +1,1528 @@
+
+/* =========================================================
+   ROCK AND FOOD - ESTILOS DE RESERVACIÓN
+
+   Incluye:
+   1. Estilos generales de la página.
+   2. Barra de progreso.
+   3. Calendario.
+   4. Formulario.
+   5. Resumen y contador de personas.
+   6. Recibo vintage del paso 3.
+   7. Pie de página.
+   8. Adaptación a móviles.
+
+   La navegación principal conserva sus estilos de styles.css.
+   ========================================================= */
+
+
+/* =========================================================
+   1. COLORES Y CONFIGURACIÓN GENERAL
+   ========================================================= */
+
+:root {
+  --reservacion-rojo: #a10e12;
+  --reservacion-mostaza: #e4b746;
+  --reservacion-texto: #58381f;
+  --reservacion-borde: #aab4bb;
+
+  /* Colores exclusivos del recibo antiguo */
+  --recibo-rojo: #9f1718;
+  --recibo-tinta: #4b2c1b;
+  --recibo-papel: #f5e4bd;
+  --recibo-papel-claro: #faedcf;
+  --recibo-linea: #b53b2d;
+}
+
+
+/* Evita que los bordes aumenten el ancho de los elementos */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* Ajustes generales */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+
+  color: var(--reservacion-texto);
+  background: #ffffff;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  overflow-x: hidden;
+}
+
+
+/* Los campos y botones utilizan la misma familia tipográfica */
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+/* Imágenes adaptables */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Texto accesible que no debe verse en pantalla */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* =========================================================
+   2. CONTENEDOR PRINCIPAL
+   ========================================================= */
+
+.reservacion-page {
+  width: min(100%, 1180px);
+  min-height: 650px;
+
+  margin: 0 auto;
+  padding: 26px clamp(18px, 6vw, 75px) 55px;
+}
+
+
+/* Oculta correctamente los pasos que no están activos */
+
+.reservacion-pantalla[hidden] {
+  display: none !important;
+}
+
+
+/* Títulos principales */
+
+.reservacion-pantalla h1 {
+  margin: 0 0 7px;
+
+  color: var(--reservacion-rojo);
+
+  font-size: clamp(30px, 4vw, 43px);
+  line-height: 1.12;
+  font-weight: 900;
+}
+
+
+/* Subtítulo */
+
+.reservacion-subtitulo {
+  margin: 0 0 20px;
+  font-size: 18px;
+}
+
+
+/* =========================================================
+   3. BARRA DE PROGRESO
+   ========================================================= */
+
+.reservacion-progreso {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  width: 100%;
+  margin: 0 0 42px;
+}
+
+
+/* Línea que conecta los tres pasos */
+
+.reservacion-ruta {
+  position: absolute;
+  z-index: 0;
+
+  top: 19px;
+  left: 0;
+  right: 0;
+
+  height: 24px;
+  overflow: hidden;
+
+  border-radius: 99px;
+
+  background: repeating-linear-gradient(
+    115deg,
+    var(--reservacion-rojo) 0 10px,
+    var(--reservacion-mostaza) 10px 20px
+  );
+}
+
+
+/* Avance rojo de la barra */
+
+#reservacion-progreso-relleno {
+  width: 0;
+  height: 100%;
+
+  border-radius: inherit;
+  background: var(--reservacion-rojo);
+
+  transition: width 0.45s ease;
+}
+
+
+/* Botones de cada etapa */
+
+.reservacion-paso {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 0;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: var(--reservacion-texto);
+}
+
+
+/* Círculos numerados */
+
+.reservacion-paso span {
+  width: 58px;
+  height: 58px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: var(--reservacion-mostaza);
+  color: #17100b;
+
+  font-size: 22px;
+  font-weight: 900;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* Texto debajo de cada número */
+
+.reservacion-paso b {
+  font-size: 17px;
+  text-align: center;
+}
+
+
+/* Paso activo y pasos completados */
+
+.reservacion-paso.activo span,
+.reservacion-paso.completo span {
+  background: var(--reservacion-rojo);
+  color: #ffffff;
+}
+
+
+/* Pasos todavía no disponibles */
+
+.reservacion-paso:disabled {
+  cursor: default;
+}
+
+
+/* Indicador de teclado accesible */
+
+.reservacion-paso:focus-visible,
+.reservacion-boton:focus-visible {
+  outline: 3px solid var(--reservacion-mostaza);
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   4. CALENDARIO Y FORMULARIO
+   ========================================================= */
+
+
+/* Distribución en dos columnas */
+
+.reservacion-columnas {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 0.95fr);
+
+  gap: clamp(28px, 7vw, 80px);
+
+  align-items: center;
+}
+
+
+/* Tarjeta del calendario */
+
+.reservacion-calendario {
+  min-width: 0;
+  overflow: hidden;
+
+  border: 7px solid var(--reservacion-borde);
+  border-radius: 39px;
+
+  background: #ffffff;
+
+  box-shadow: 2px 3px 0 #7da5a9;
+}
+
+
+/* Cabecera del calendario */
+
+.reservacion-calendario-cabecera {
+  min-height: 42px;
+
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 42px;
+
+  align-items: center;
+
+  background: var(--reservacion-rojo);
+  color: #ffffff;
+}
+
+
+/* Nombre del mes */
+
+.reservacion-calendario-cabecera h2 {
+  margin: 0;
+
+  text-align: center;
+
+  font-size: clamp(19px, 2.5vw, 28px);
+  font-weight: 900;
+}
+
+
+/* Botones de meses anterior y siguiente */
+
+.reservacion-calendario-cabecera button {
+  width: 30px;
+  height: 30px;
+
+  justify-self: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--reservacion-mostaza);
+  color: var(--reservacion-rojo);
+
+  font-size: 29px;
+  font-weight: 900;
+  line-height: 20px;
+}
+
+
+/* Mes anterior deshabilitado */
+
+.reservacion-calendario-cabecera button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+
+/* Cuadrícula de los días */
+
+.reservacion-dias-semana,
+.reservacion-dias {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+
+/* Nombres de los días de la semana */
+
+.reservacion-dias-semana {
+  min-height: 36px;
+
+  align-items: center;
+
+  background: var(--reservacion-mostaza);
+  color: #080808;
+
+  text-align: center;
+
+  font-size: clamp(11px, 1.6vw, 18px);
+  font-weight: 900;
+}
+
+
+/* Cada día del calendario */
+
+.reservacion-dia {
+  min-width: 0;
+  min-height: 58px;
+
+  display: grid;
+  place-items: center;
+
+  border: 0;
+  border-top: 1px solid #b75a5a;
+  border-right: 1px solid #b75a5a;
+
+  background: #ffffff;
+  color: #090909;
+
+  font-size: clamp(14px, 1.7vw, 20px);
+  font-weight: 800;
+}
+
+
+/* Elimina el borde derecho de cada séptimo día */
+
+.reservacion-dia:nth-child(7n) {
+  border-right: 0;
+}
+
+
+/* Número del día */
+
+.reservacion-dia span {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+}
+
+
+/* Días pasados */
+
+.reservacion-dia:disabled {
+  background: #f3f3f3;
+  color: #aaaaaa;
+  cursor: not-allowed;
+}
+
+
+/* Efecto al pasar el cursor */
+
+.reservacion-dia:not(:disabled):hover {
+  background: #f9e5b0;
+}
+
+
+/* Día seleccionado */
+
+.reservacion-dia.seleccionado {
+  background: var(--reservacion-rojo);
+  color: #ffffff;
+}
+
+
+/* Espacios vacíos antes del primer día */
+
+.reservacion-dia.vacio {
+  background: #ffffff;
+  border-color: transparent;
+}
+
+
+/* Instrucción debajo del calendario */
+
+.reservacion-ayuda-calendario {
+  margin: 0;
+  padding: 7px 10px 10px;
+
+  color: #745c47;
+
+  font-size: 11px;
+  text-align: center;
+}
+
+
+/* =========================================================
+   5. CAMPOS DEL FORMULARIO
+   ========================================================= */
+
+.reservacion-campos {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  min-width: 0;
+}
+
+
+/* Etiquetas */
+
+.reservacion-campos label {
+  margin: 2px 0 4px 12px;
+
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+
+/* Campos de texto y selección */
+
+.reservacion-campos input,
+.reservacion-campos select {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+
+  margin: 0 0 5px;
+  padding: 8px 16px;
+
+  border: 3px solid var(--reservacion-rojo);
+  border-radius: 999px;
+
+  outline: none;
+
+  color: var(--reservacion-texto);
+  background: #ffffff;
+}
+
+
+/* Campo de hora */
+
+.reservacion-campos select {
+  border-radius: 18px;
+}
+
+
+/* Resaltado al seleccionar un campo */
+
+.reservacion-campos input:focus,
+.reservacion-campos select:focus {
+  box-shadow: 0 0 0 3px #e4b74670;
+}
+
+
+/* Mensajes de error */
+
+.reservacion-mensaje {
+  min-height: 20px;
+
+  margin: 12px 0 0;
+
+  color: var(--reservacion-rojo);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   6. BOTONES DE ACCIÓN
+   ========================================================= */
+
+.reservacion-acciones {
+  display: flex;
+  gap: 28px;
+
+  margin: 20px auto 0;
+}
+
+
+/* Botones centrados */
+
+.reservacion-acciones.centrado {
+  justify-content: center;
+}
+
+
+/* Botones anterior y siguiente */
+
+.reservacion-acciones.doble {
+  justify-content: space-between;
+  gap: 16px;
+
+  max-width: 900px;
+}
+
+
+/* Diseño de los botones principales */
+
+.reservacion-boton {
+  min-width: min(300px, 100%);
+  min-height: 60px;
+
+  padding: 14px 26px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: var(--reservacion-mostaza);
+  color: var(--reservacion-rojo);
+
+  font-size: clamp(18px, 2.2vw, 25px);
+  font-weight: 900;
+
+  text-align: center;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* Efecto de los botones */
+
+.reservacion-boton:hover {
+  transform: translateY(-2px);
+  background: #f0c85f;
+}
+
+
+/* =========================================================
+   7. PASO 2: RESUMEN DE LA RESERVACIÓN
+   ========================================================= */
+
+.reservacion-resumen-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(230px, 0.8fr);
+
+  gap: clamp(28px, 7vw, 85px);
+
+  align-items: start;
+
+  min-height: 270px;
+}
+
+
+/* Evita que los datos largos rompan el diseño */
+
+.reservacion-resumen-datos {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+
+/* Párrafos de los datos */
+
+.reservacion-resumen-datos p {
+  margin: 0 0 15px;
+
+  font-size: clamp(15px, 1.7vw, 19px);
+  line-height: 1.35;
+}
+
+
+/* Columna de precios */
+
+.reservacion-calculo {
+  min-width: 0;
+  text-align: center;
+}
+
+
+/* Títulos del contador y el precio */
+
+.reservacion-calculo h2 {
+  margin: 5px 0 18px;
+
+  font-size: 18px;
+  font-weight: 900;
+}
+
+
+/* Contador de personas */
+
+.reservacion-contador {
+  width: min(205px, 100%);
+  height: 55px;
+
+  margin: 0 auto 8px;
+
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr) 60px;
+
+  overflow: hidden;
+  border-radius: 13px;
+
+  background: #e2e0e0;
+}
+
+
+/* Botones más y menos */
+
+.reservacion-contador button {
+  border: 0;
+
+  background: var(--reservacion-rojo);
+  color: #ffffff;
+
+  font-size: 40px;
+  line-height: 1;
+}
+
+
+/* Botones desactivados */
+
+.reservacion-contador button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* Número de personas */
+
+.reservacion-contador output {
+  display: grid;
+  place-items: center;
+
+  color: var(--reservacion-texto);
+  font-size: 30px;
+}
+
+
+/* Información del máximo y del precio por persona */
+
+#reservacion-maximo,
+.reservacion-calculo > p {
+  margin: 0 0 18px;
+  font-size: 12px;
+}
+
+
+/* Total de la reserva */
+
+.reservacion-total {
+  width: min(220px, 100%);
+  min-height: 55px;
+
+  margin: 0 auto 7px;
+  padding: 7px 12px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 18px;
+
+  background: #e2e0e0;
+  color: var(--reservacion-texto);
+
+  font-size: 31px;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   8. PASO 3: RECIBO ANTIGUO ESTILO DINER
+
+   Estos estilos son exclusivos del comprobante.
+   No modifican el calendario ni el resumen.
+   ========================================================= */
+
+
+/* Papel antiguo */
+
+.recibo-vintage {
+  position: relative;
+  isolation: isolate;
+
+  width: min(100%, 560px);
+
+  margin: 20px auto 24px;
+  padding: 32px 34px 27px;
+
+  color: var(--recibo-tinta);
+
+  border: 1px solid #d0b785;
+
+  background-color: var(--recibo-papel);
+
+  /* Textura sutil de papel envejecido */
+  background-image:
+    radial-gradient(
+      ellipse at 12% 18%,
+      rgba(255, 250, 224, 0.65),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 88% 78%,
+      rgba(166, 115, 45, 0.12),
+      transparent 38%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(110, 75, 32, 0.035) 0,
+      rgba(110, 75, 32, 0.035) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  box-shadow:
+    0 7px 18px rgba(65, 39, 15, 0.13),
+    inset 0 0 25px rgba(130, 91, 35, 0.08);
+
+  font-family: "Courier New", Courier, monospace;
+  text-align: left;
+}
+
+
+/* Bordes dentados del papel */
+
+.recibo-vintage::before,
+.recibo-vintage::after {
+  content: "";
+
+  position: absolute;
+  z-index: 2;
+  left: 0;
+
+  width: 100%;
+  height: 10px;
+
+  background-repeat: repeat-x;
+  background-size: 14px 10px;
+
+  pointer-events: none;
+}
+
+
+/* Borde superior en zigzag */
+
+.recibo-vintage::before {
+  top: -1px;
+
+  background-image:
+    linear-gradient(
+      135deg,
+      transparent 50%,
+      var(--recibo-papel) 50%
+    ),
+    linear-gradient(
+      225deg,
+      transparent 50%,
+      var(--recibo-papel) 50%
+    );
+
+  background-position: 0 0, 7px 0;
+}
+
+
+/* Borde inferior en zigzag */
+
+.recibo-vintage::after {
+  bottom: -1px;
+
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 50%,
+      var(--recibo-papel) 50%
+    ),
+    linear-gradient(
+      315deg,
+      transparent 50%,
+      var(--recibo-papel) 50%
+    );
+
+  background-position: 0 0, 7px 0;
+}
+
+
+/* Cabecera: marca, título y sello */
+
+.recibo-vintage__encabezado {
+  display: grid;
+
+  grid-template-columns: 54px minmax(0, 1fr) 58px;
+
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 15px;
+}
+
+
+/* Emblema RF */
+
+.recibo-vintage__marca {
+  width: 49px;
+  height: 49px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid var(--recibo-rojo);
+  border-radius: 50%;
+
+  color: var(--recibo-rojo);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 23px;
+  font-weight: 900;
+
+  transform: rotate(-8deg);
+}
+
+.recibo-vintage__marca span + span {
+  margin-left: -3px;
+  margin-top: 9px;
+}
+
+
+/* Título central */
+
+.recibo-vintage__titulo {
+  min-width: 0;
+  text-align: center;
+}
+
+.recibo-vintage__titulo p {
+  margin: 0 0 4px;
+
+  color: var(--recibo-rojo);
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+}
+
+.recibo-vintage__titulo h2 {
+  margin: 0;
+
+  color: var(--recibo-rojo);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(25px, 5vw, 34px);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.recibo-vintage__titulo > span {
+  display: block;
+  margin-top: 5px;
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+
+/* Sello decorativo */
+
+.recibo-vintage__sello {
+  min-height: 48px;
+  padding: 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid var(--recibo-rojo);
+  border-radius: 50%;
+
+  color: var(--recibo-rojo);
+
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1.3;
+  text-align: center;
+
+  transform: rotate(7deg);
+}
+
+
+/* Líneas rojas decorativas */
+
+.recibo-vintage__linea {
+  width: 100%;
+  height: 4px;
+
+  margin: 14px 0;
+
+  background: repeating-linear-gradient(
+    90deg,
+    var(--recibo-linea) 0 6px,
+    transparent 6px 9px
+  );
+}
+
+
+/* Línea punteada */
+
+.recibo-vintage__linea--punteada {
+  height: 1px;
+
+  margin: 16px 0;
+
+  background: none;
+  border-top: 2px dashed var(--recibo-linea);
+}
+
+
+/* Información de la reserva */
+
+.recibo-vintage__informacion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* Cada fila del recibo */
+
+.recibo-vintage__informacion p {
+  display: grid;
+
+  grid-template-columns: minmax(105px, 0.8fr) minmax(0, 1.7fr);
+
+  gap: 8px;
+  margin: 0;
+
+  color: var(--recibo-tinta);
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* Etiquetas en rojo */
+
+.recibo-vintage__informacion strong {
+  color: var(--recibo-rojo);
+  font-weight: 900;
+}
+
+
+/* Bloque del total */
+
+.recibo-vintage__total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 8px;
+  margin: 16px 0;
+
+  color: var(--recibo-tinta);
+
+  font-size: 12px;
+  font-weight: 900;
+}
+
+
+/* Valor total */
+
+.recibo-vintage__total strong {
+  color: var(--recibo-rojo);
+
+  font-size: clamp(17px, 3.5vw, 22px);
+  font-weight: 900;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* Frase de agradecimiento */
+
+.recibo-vintage__gracias {
+  margin: 20px 0;
+
+  color: var(--recibo-rojo);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(14px, 3vw, 17px);
+  font-style: italic;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+/* Texto inferior del recibo */
+
+.recibo-vintage__pie {
+  margin: 14px 0 0;
+
+  color: var(--recibo-tinta);
+
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1.8;
+
+  text-align: center;
+}
+
+
+/* Aviso demostrativo situado fuera del papel */
+
+.recibo-vintage__aviso {
+  max-width: 560px;
+
+  margin: 0 auto 15px;
+  padding: 0 10px;
+
+  color: #755c48;
+
+  font-size: 12px;
+  line-height: 1.6;
+
+  text-align: center;
+}
+
+
+/* Botón de nueva reserva */
+
+#reservacion-pantalla-3 .reservacion-boton {
+  max-width: 100%;
+  white-space: normal;
+}
+
+
+/* =========================================================
+   9. PIE DE PÁGINA
+   ========================================================= */
+
+.reservacion-footer {
+  min-height: 290px;
+
+  padding: 52px clamp(18px, 3vw, 42px);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(150px, 1.3fr)
+    repeat(4, minmax(105px, 1fr));
+
+  align-items: center;
+  gap: clamp(16px, 3vw, 38px);
+
+  background: var(--reservacion-rojo);
+  color: #ffffff;
+}
+
+
+/* Logo del pie */
+
+.reservacion-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.reservacion-logo img {
+  width: min(100%, 210px);
+  max-height: 120px;
+
+  object-fit: contain;
+}
+
+
+/* Columnas del pie */
+
+.reservacion-footer > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+
+  text-align: center;
+}
+
+
+/* Títulos del pie */
+
+.reservacion-footer h2 {
+  margin: 0 0 7px;
+  font-size: 11px;
+}
+
+
+/* Enlaces del pie */
+
+.reservacion-footer a {
+  color: inherit;
+  text-decoration: none;
+
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.reservacion-footer a:hover {
+  color: var(--reservacion-mostaza);
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   10. ADAPTACIÓN PARA TABLETAS
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .reservacion-page {
+    padding-right: 28px;
+    padding-left: 28px;
+  }
+
+  .reservacion-columnas {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 0.95fr);
+
+    gap: 25px;
+  }
+
+  .reservacion-dia {
+    min-height: 48px;
+  }
+
+  .reservacion-dia span {
+    width: 31px;
+    height: 31px;
+  }
+
+  .reservacion-footer {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+  .reservacion-logo img {
+    width: 145px;
+  }
+
+}
+
+
+/* =========================================================
+   11. ADAPTACIÓN PARA CELULARES
+   ========================================================= */
+
+@media (max-width: 620px) {
+
+  /* Espacio exterior de la página */
+
+  .reservacion-page {
+    padding: 18px 15px 38px;
+  }
+
+
+  /* Barra de progreso adaptable */
+
+  .reservacion-progreso {
+    margin-bottom: 30px;
+  }
+
+  .reservacion-ruta {
+    top: 15px;
+    height: 18px;
+  }
+
+  .reservacion-paso {
+    gap: 8px;
+  }
+
+  .reservacion-paso span {
+    width: 48px;
+    height: 48px;
+
+    font-size: 18px;
+  }
+
+  .reservacion-paso b {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+
+
+  /* Títulos */
+
+  .reservacion-pantalla h1 {
+    font-size: 30px;
+  }
+
+  .reservacion-subtitulo {
+    font-size: 15px;
+  }
+
+
+  /* Calendario y formulario en una columna */
+
+  .reservacion-columnas {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .reservacion-calendario {
+    border-width: 5px;
+    border-radius: 27px;
+  }
+
+  .reservacion-calendario-cabecera {
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+  }
+
+  .reservacion-calendario-cabecera h2 {
+    font-size: 21px;
+  }
+
+  .reservacion-dias-semana {
+    min-height: 32px;
+    font-size: 12px;
+  }
+
+  .reservacion-dia {
+    min-height: clamp(39px, 11vw, 52px);
+    font-size: 15px;
+  }
+
+  .reservacion-dia span {
+    width: 29px;
+    height: 29px;
+  }
+
+
+  /* Formulario */
+
+  .reservacion-campos label {
+    font-size: 15px;
+  }
+
+  .reservacion-campos input,
+  .reservacion-campos select {
+    min-height: 44px;
+  }
+
+
+  /* Botones */
+
+  .reservacion-boton {
+    width: min(100%, 360px);
+    min-width: 0;
+    min-height: 54px;
+
+    font-size: 19px;
+  }
+
+  .reservacion-acciones.doble {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .reservacion-acciones.doble button {
+    width: 100%;
+  }
+
+
+  /* Resumen en una columna */
+
+  .reservacion-resumen-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 25px;
+  }
+
+  .reservacion-resumen-datos p {
+    font-size: 15px;
+  }
+
+  .reservacion-calculo {
+    padding-bottom: 10px;
+  }
+
+
+  /* Recibo vintage en celular */
+
+  .recibo-vintage {
+    width: 100%;
+
+    margin: 22px auto 20px;
+    padding: 25px 18px 23px;
+  }
+
+  .recibo-vintage__encabezado {
+    grid-template-columns: 42px minmax(0, 1fr) 45px;
+    gap: 8px;
+  }
+
+  .recibo-vintage__marca {
+    width: 40px;
+    height: 40px;
+
+    font-size: 19px;
+  }
+
+  .recibo-vintage__sello {
+    min-height: 41px;
+    font-size: 8px;
+  }
+
+  .recibo-vintage__titulo p {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .recibo-vintage__titulo h2 {
+    font-size: 27px;
+  }
+
+  .recibo-vintage__titulo > span {
+    font-size: 7px;
+  }
+
+  .recibo-vintage__informacion p {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+
+    font-size: 12px;
+  }
+
+  .recibo-vintage__total {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .recibo-vintage__gracias {
+    font-size: 14px;
+  }
+
+
+  /* Pie de página en dos columnas */
+
+  .reservacion-footer {
+    padding: 38px 18px;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 15px;
+  }
+
+  .reservacion-logo {
+    grid-column: 1 / -1;
+  }
+
+  .reservacion-logo img {
+    width: 165px;
+  }
+
+  .reservacion-footer h2 {
+    font-size: 12px;
+  }
+
+  .reservacion-footer a {
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .reservacion-footer > div:last-child {
+    grid-column: 1 / -1;
+  }
+
+}
+
+
+/* =========================================================
+   12. CELULARES MUY ESTRECHOS
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .reservacion-page {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .reservacion-paso span {
+    width: 42px;
+    height: 42px;
+  }
+
+  .reservacion-ruta {
+    top: 12px;
+    height: 18px;
+  }
+
+  .reservacion-paso b {
+    font-size: 11px;
+  }
+
+  .recibo-vintage {
+    padding-right: 13px;
+    padding-left: 13px;
+  }
+
+  .recibo-vintage__encabezado {
+    grid-template-columns: 35px minmax(0, 1fr) 39px;
+    gap: 6px;
+  }
+
+  .recibo-vintage__marca {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .recibo-vintage__sello {
+    min-height: 36px;
+    font-size: 7px;
+  }
+
+  .recibo-vintage__titulo h2 {
+    font-size: 23px;
+  }
+
+}
+
+
+/* =========================================================
+   13. RESPETAR LA PREFERENCIA DE MENOS ANIMACIONES
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+}
+

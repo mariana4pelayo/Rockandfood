@@ -1,0 +1,1162 @@
+
+/* =====================================================
+   ROCK AND FOOD - DISEÑO DE PRODUCTOS
+   Fondo blanco, rojo diner y mostaza.
+   ===================================================== */
+
+:root {
+  --rojo: #970f12;
+  --rojo-oscuro: #70090c;
+  --mostaza: #e5b544;
+  --mostaza-claro: #f6df9d;
+  --blanco: #ffffff;
+  --texto: #211b18;
+  --gris: #77716c;
+  --borde: #eee7df;
+  --sombra: 0 8px 24px rgba(50, 30, 20, .09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  background: var(--blanco);
+  color: var(--texto);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--mostaza);
+  outline-offset: 3px;
+}
+
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* =====================================================
+   1. NAVEGACIÓN
+   ===================================================== */
+
+.encabezado {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--mostaza);
+  border-bottom: 4px solid var(--rojo);
+}
+
+.navegacion {
+  width: min(100%, 1500px);
+  min-height: 88px;
+  margin: auto;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+/* Logo tipográfico. Puedes reemplazarlo por una imagen. */
+
+.logo {
+  flex: 0 0 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--rojo);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 900;
+  line-height: .78;
+  text-align: center;
+}
+
+.logo span {
+  transform: rotate(-5deg);
+}
+
+.logo small {
+  display: block;
+  font-size: 20px;
+}
+
+.enlace-nav {
+  flex: 0 0 82px;
+  min-width: 0;
+  padding: 10px 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  color: var(--rojo);
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+
+  transition: background .2s, color .2s;
+}
+
+.enlace-nav:hover,
+.enlace-nav.activo {
+  background: var(--rojo);
+  color: var(--mostaza);
+}
+
+.nav-icono {
+  font-size: 27px;
+  line-height: 1;
+}
+
+.buscador {
+  flex: 1 1 150px;
+  min-width: 70px;
+  max-width: 280px;
+  margin: auto 10px auto auto;
+
+  display: flex;
+  align-items: center;
+
+  border: 2px solid var(--rojo);
+  border-radius: 30px;
+  overflow: hidden;
+  background: var(--rojo);
+}
+
+.buscador input {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 12px;
+
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: white;
+}
+
+.buscador input::placeholder {
+  color: #f9e7ba;
+}
+
+.buscador button {
+  width: 42px;
+  flex: 0 0 42px;
+  padding: 6px;
+
+  border: 0;
+  background: var(--rojo);
+  color: var(--mostaza);
+  font-size: 26px;
+}
+
+.boton-carrito {
+  position: relative;
+  flex: 0 0 78px;
+  padding: 9px 2px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  border: 0;
+  background: transparent;
+  color: var(--rojo);
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.carrito-icono {
+  font-size: 27px;
+  line-height: 1;
+}
+
+.carrito-contador {
+  position: absolute;
+  top: 7px;
+  right: 0;
+
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+
+  display: grid;
+  place-items: center;
+
+  border: 2px solid var(--mostaza);
+  border-radius: 50px;
+  background: var(--rojo);
+  color: white;
+
+  font-size: 11px;
+}
+
+.carrito-contador:empty {
+  display: none;
+}
+
+
+/* =====================================================
+   2. PRESENTACIÓN
+   ===================================================== */
+
+.presentacion {
+  padding: 54px 20px 40px;
+  text-align: center;
+}
+
+.presentacion-etiqueta,
+.categoria-etiqueta {
+  color: var(--rojo);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.presentacion h1 {
+  margin: 12px 0;
+  color: var(--rojo);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(32px, 5vw, 54px);
+  font-style: italic;
+}
+
+.presentacion > p:last-child {
+  margin-bottom: 0;
+  color: var(--gris);
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   3. CATEGORÍAS
+   ===================================================== */
+
+.categoria {
+  padding: 28px 0 36px;
+  background: #f0eed7;
+  scroll-margin-top: 95px;
+}
+
+.categoria-roja {
+  background: #fffaf5;
+}
+
+.categoria-titulo {
+  width: min(100% - 48px, 1150px);
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.categoria-titulo h2 {
+  margin: 6px 20px 0;
+  color: var(--rojo);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(27px, 3.4vw, 38px);
+}
+
+.categoria-numero {
+  padding-bottom: 5px;
+  color: var(--gris);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   4. FRANJA AJEDREZADA DECORATIVA
+   ===================================================== */
+
+.franja-ajedrez {
+  height: 18px;
+  width: 100%;
+  margin-bottom: 24px;
+
+  background-size: 24px 24px;
+  background-position: 0 0;
+}
+
+.franja-mostaza {
+  background-color: white;
+  background-image:
+    linear-gradient(45deg, var(--mostaza) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--mostaza) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--mostaza) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--mostaza) 75%);
+  background-size: 24px 24px;
+  background-position:
+    0 0,
+    0 12px,
+    12px -12px,
+    -12px 0;
+}
+
+.franja-roja {
+  background-color: white;
+  background-image:
+    linear-gradient(45deg, var(--rojo) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--rojo) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--rojo) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--rojo) 75%);
+  background-size: 24px 24px;
+  background-position:
+    0 0,
+    0 12px,
+    12px -12px,
+    -12px 0;
+}
+
+
+/* =====================================================
+   5. CARRUSEL Y FLECHAS
+   ===================================================== */
+
+.carrusel-contenedor {
+  width: min(100% - 28px, 1220px);
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) 46px;
+  align-items: center;
+  gap: 14px;
+}
+
+.carrusel-ventana {
+  min-width: 0;
+  overflow: hidden;
+  padding: 30px 0 35px;
+}
+
+.productos-pista {
+  display: flex;
+  align-items: stretch;
+  gap: 22px;
+
+  transform: translateX(0);
+  transition: transform .45s cubic-bezier(.2, .7, .2, 1);
+
+  /* Evita que las tarjetas se compriman */
+  will-change: transform;
+}
+
+.flecha {
+  width: 43px;
+  height: 43px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--rojo);
+  color: white;
+
+  font-size: 19px;
+  box-shadow: 0 4px 10px rgba(100, 0, 0, .15);
+
+  transition: transform .2s, background .2s;
+}
+
+.flecha:hover {
+  transform: scale(1.1);
+  background: var(--rojo-oscuro);
+}
+
+.flecha:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* =====================================================
+   6. TARJETAS DE PRODUCTOS
+   ===================================================== */
+
+.tarjeta-producto {
+
+  position: relative;
+  isolation: isolate;
+
+  flex: 0 0 220px;
+  min-width: 0;
+  min-height: 245px;
+  margin-top: 22px;
+  padding: 53px 17px 15px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid var(--borde);
+  border-radius: 24px;
+  background: white;
+
+  box-shadow: var(--sombra);
+
+  transform: scale(.96);
+  transform-origin: center center;
+
+  transition:
+    transform .28s ease,
+    box-shadow .28s ease,
+    opacity .28s ease,
+    border-color .28s ease;
+
+  z-index: 1;
+}
+
+/* Al pasar el cursor, la tarjeta aumenta de tamaño */
+
+.tarjeta-producto:hover,
+.tarjeta-producto:focus-within {
+  transform: scale(1.07);
+  box-shadow: 0 16px 35px rgba(50, 20, 10, .17);
+  border-color: var(--mostaza);
+  z-index: 5;
+}
+
+/* Las otras tarjetas se hacen ligeramente más pequeñas */
+
+.productos-pista:has(.tarjeta-producto:hover)
+.tarjeta-producto:not(:hover) {
+  transform: scale(.92);
+  opacity: .82;
+}
+
+
+/* Imagen circular que sobresale de la tarjeta */
+
+.producto-imagen {
+
+  position: absolute;
+  top: -27px;
+  left: 50%;
+
+  width: 100px;
+  height: 100px;
+
+  transform: translateX(-50%);
+
+  display: grid;
+  place-items: center;
+
+  border: 3px solid var(--mostaza);
+  border-radius: 50%;
+  overflow: hidden;
+
+  background: var(--mostaza-claro);
+}
+
+.producto-imagen img {
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: white;
+}
+
+
+/* Botón de favorito */
+
+.boton-like {
+  position: absolute;
+  top: 10px;
+  right: 11px;
+
+  width: 31px;
+  height: 31px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: white;
+  color: var(--rojo);
+
+  font-size: 23px;
+  line-height: 1;
+
+  transition: transform .2s, color .2s, background .2s;
+}
+
+.boton-like:hover {
+  transform: scale(1.15);
+}
+
+.boton-like[aria-pressed="true"] {
+  background: #fff0f0;
+  color: var(--rojo);
+}
+
+
+/* Nombre del producto */
+
+.producto-nombre {
+  margin: 0 35px 8px 0;
+margin-top: 25px;
+  color: var(--rojo);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+
+/* Descripción */
+
+.producto-descripcion {
+  margin: 0 0 15px;
+
+  color: #76675c;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* Precio y botón comprar */
+
+.producto-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+
+  margin-top: auto;
+}
+
+.producto-precio {
+  color: var(--rojo);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.boton-comprar {
+  min-height: 35px;
+  padding: 8px 12px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: var(--rojo);
+  color: white;
+
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+
+  transition: background .2s, transform .2s;
+}
+
+.boton-comprar:hover {
+  background: var(--rojo-oscuro);
+  transform: translateY(-1px);
+}
+
+
+/* Categorías de fondo cálido usan botones mostaza */
+
+.categoria:not(.categoria-roja) .boton-comprar {
+  background: var(--mostaza);
+  color: var(--rojo);
+}
+
+.categoria:not(.categoria-roja) .boton-comprar:hover {
+  background: #f0c85f;
+}
+
+
+/* Indicador del carrusel */
+
+.carrusel-pie {
+  width: min(100% - 48px, 1150px);
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+
+  color: var(--gris);
+  font-size: 11px;
+}
+
+.carrusel-posicion {
+  color: var(--rojo);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   7. VENTANA DE CARRITO
+   ===================================================== */
+
+.fondo-modal[hidden] {
+  display: none !important;
+}
+
+.fondo-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  background: rgba(25, 15, 10, .6);
+}
+
+.modal-carrito {
+  position: relative;
+
+  width: min(100%, 500px);
+  max-height: min(85vh, 720px);
+  overflow-y: auto;
+
+  padding: 32px 25px 25px;
+
+  border-radius: 22px;
+  background: white;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, .25);
+}
+
+.modal-carrito h2 {
+  margin: 7px 0 20px;
+  color: var(--rojo);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+}
+
+.cerrar-modal {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+
+  width: 37px;
+  height: 37px;
+
+  border: 0;
+  border-radius: 50%;
+  background: #f5eee6;
+  color: var(--rojo);
+
+  font-size: 28px;
+}
+
+.carrito-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.carrito-vacio {
+  padding: 22px 0;
+  color: var(--gris);
+  text-align: center;
+}
+
+.carrito-fila {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.carrito-fila h3 {
+  margin: 0 0 5px;
+  color: var(--texto);
+  font-size: 14px;
+}
+
+.carrito-fila p {
+  margin: 0;
+  color: var(--gris);
+  font-size: 12px;
+}
+
+.carrito-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.carrito-cantidad button {
+  width: 28px;
+  height: 28px;
+
+  border: 0;
+  border-radius: 50%;
+  background: var(--mostaza);
+  color: var(--rojo);
+  font-weight: 900;
+}
+
+.carrito-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 2px solid var(--mostaza);
+
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.carrito-total strong {
+  color: var(--rojo);
+  font-size: 21px;
+}
+
+.boton-vaciar {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+
+  border: 1px solid var(--rojo);
+  border-radius: 10px;
+  background: white;
+  color: var(--rojo);
+  font-weight: 900;
+}
+
+.nota-carrito {
+  margin: 15px 0 0;
+  color: var(--gris);
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+
+/* =====================================================
+   8. MENSAJE FLOTANTE
+   ===================================================== */
+
+.notificacion {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 200;
+
+  max-width: min(380px, calc(100% - 40px));
+  padding: 15px 20px;
+
+  border-left: 5px solid var(--mostaza);
+  border-radius: 12px;
+
+  background: var(--rojo);
+  color: white;
+
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.5;
+
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .2);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+
+  transition: opacity .2s, transform .2s, visibility .2s;
+}
+
+.notificacion.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+/* =====================================================
+   9. PIE DE PÁGINA
+   ===================================================== */
+
+.pie-pagina {
+  padding: 50px max(25px, calc((100% - 1150px) / 2));
+
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: 28px;
+
+  background: var(--rojo);
+  color: white;
+}
+
+.logo-pie {
+  color: var(--mostaza);
+  font-size: 38px;
+}
+
+.pie-pagina h3 {
+  margin: 0 0 15px;
+  color: var(--mostaza);
+  font-size: 13px;
+}
+
+.pie-pagina > div {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.pie-pagina > div a {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.pie-pagina > div a:hover {
+  color: var(--mostaza);
+}
+
+
+/* =====================================================
+   10. TABLETAS
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+  .navegacion {
+    padding: 0 12px;
+    gap: 5px;
+  }
+
+  .logo {
+    flex-basis: 125px;
+    font-size: 28px;
+  }
+
+  .logo small {
+    font-size: 16px;
+  }
+
+  .enlace-nav {
+    flex-basis: 66px;
+    font-size: 9px;
+  }
+
+  .nav-icono {
+    font-size: 23px;
+  }
+
+  .buscador {
+    margin-right: 2px;
+  }
+
+  .boton-carrito {
+    flex-basis: 65px;
+    font-size: 9px;
+  }
+
+  .carrusel-contenedor {
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+    gap: 8px;
+  }
+
+  .flecha {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .tarjeta-producto {
+    flex-basis: 205px;
+  }
+
+  .pie-pagina {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =====================================================
+   11. CELULARES
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+  .navegacion {
+    min-height: 72px;
+    padding: 0 8px;
+    gap: 2px;
+  }
+
+  .logo {
+    flex: 1 1 95px;
+    min-width: 70px;
+    font-size: 23px;
+  }
+
+  .logo small {
+    font-size: 13px;
+  }
+
+  .enlace-nav {
+    flex: 0 1 54px;
+    padding: 8px 2px;
+    font-size: 8px;
+  }
+
+  .nav-icono {
+    font-size: 20px;
+  }
+
+  .buscador {
+    flex: 0 1 95px;
+    min-width: 50px;
+    margin: auto 2px;
+  }
+
+  .buscador input {
+    padding: 8px 5px;
+    font-size: 11px;
+  }
+
+  .buscador button {
+    width: 28px;
+    flex-basis: 28px;
+    font-size: 21px;
+  }
+
+  .boton-carrito {
+    flex: 0 0 49px;
+    font-size: 7px;
+  }
+
+  .carrito-icono {
+    font-size: 22px;
+  }
+
+  .carrito-contador {
+    top: 3px;
+    right: -1px;
+    min-width: 18px;
+    height: 18px;
+    font-size: 9px;
+  }
+
+  .presentacion {
+    padding: 35px 15px 28px;
+  }
+
+  .categoria {
+    padding-top: 24px;
+    padding-bottom: 25px;
+  }
+
+  .categoria-titulo {
+    width: calc(100% - 30px);
+    margin-bottom: 15px;
+  }
+
+  .categoria-titulo h2 {
+    font-size: 26px;
+  }
+
+  .categoria-numero {
+    font-size: 9px;
+  }
+
+  .franja-ajedrez {
+    height: 13px;
+    margin-bottom: 5px;
+    background-size: 20px 20px;
+  }
+
+  .carrusel-contenedor {
+    width: calc(100% - 14px);
+    grid-template-columns: 30px minmax(0, 1fr) 30px;
+    gap: 5px;
+  }
+
+  .flecha {
+    width: 29px;
+    height: 29px;
+    font-size: 13px;
+  }
+
+  .carrusel-ventana {
+    padding: 28px 0 30px;
+  }
+
+  .productos-pista {
+    gap: 14px;
+  }
+
+  .tarjeta-producto {
+    flex-basis: min(220px, calc(100vw - 95px));
+    min-height: 235px;
+    padding: 52px 13px 13px;
+    border-radius: 20px;
+  }
+
+  .tarjeta-producto:hover,
+  .tarjeta-producto:focus-within {
+    transform: scale(1.025);
+  }
+
+  .producto-imagen {
+    width: 90px;
+    height: 90px;
+    top: -24px;
+  }
+
+  .producto-nombre {
+    font-size: 17px;
+  }
+
+  .producto-descripcion {
+    font-size: 11px;
+  }
+
+  .producto-precio {
+    font-size: 17px;
+  }
+
+  .boton-comprar {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+  .carrusel-pie {
+    width: calc(100% - 35px);
+    font-size: 10px;
+  }
+
+  .pie-pagina {
+    padding: 35px 22px;
+    gap: 25px 16px;
+  }
+
+  .logo-pie {
+    font-size: 30px;
+  }
+
+  .pie-pagina h3 {
+    font-size: 12px;
+  }
+
+  .pie-pagina > div a {
+    font-size: 11px;
+  }
+
+  .modal-carrito {
+    padding: 30px 18px 20px;
+  }
+
+}
+
+
+/* Pantallas muy pequeñas */
+
+@media (max-width: 370px) {
+
+  .logo {
+    flex-basis: 63px;
+    font-size: 19px;
+  }
+
+  .logo small {
+    font-size: 11px;
+  }
+
+  .enlace-nav {
+    flex-basis: 44px;
+    font-size: 7px;
+  }
+
+  .nav-icono {
+    font-size: 17px;
+  }
+
+  .buscador {
+    flex-basis: 48px;
+  }
+
+  .buscador input {
+    width: 10px;
+    padding: 6px 2px;
+  }
+
+  .boton-carrito {
+    flex-basis: 42px;
+  }
+
+  .carrusel-pie > span:last-child {
+    text-align: right;
+  }
+
+}
+
+
+/* Respeta la preferencia de reducir animaciones */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+
+}

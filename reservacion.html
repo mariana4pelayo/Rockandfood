@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Reservación | Rock and Food</title>
+
+  <!-- CSS original de la página web y de la navegación -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- CSS del calendario, formulario y confirmación -->
+  <link rel="stylesheet" href="reservacion.css">
+</head>
+
+<body>
+
+  <!-- ==================================================
+       NAVEGACIÓN ORIGINAL DE ROCK AND FOOD
+       Conserva los iconos y enlaces de tu proyecto.
+       Su apariencia se controla desde styles.css.
+       ================================================== -->
+
+  <header class="site-header" id="inicio">
+    <nav class="navbar" aria-label="Navegación principal">
+
+      <a class="brand" href="index.html"
+         aria-label="Rock and Food, inicio">
+        <img src="/iconos/logo-14.png" alt="Rock and Food">
+      </a>
+
+      <a class="nav-item" href="index.html#menu"
+         aria-label="Ir al menú">
+        <img src="/iconos/menu.png" alt="" class="nav-icon">
+        <span>MENÚ</span>
+      </a>
+
+      <a class="nav-item" href="reservacion.html"
+         aria-label="Ir a reservas">
+        <img src="/iconos/reserva.png" alt="" class="nav-icon">
+        <span>RESERVA</span>
+      </a>
+
+      <a class="nav-item" href="#usuario"
+         aria-label="Área de usuario">
+        <img src="/iconos/usuario.png" alt="" class="nav-icon">
+        <span>USUARIO</span>
+      </a>
+
+      <!-- Buscador de la navegación -->
+      <form class="search-form" role="search" action="index.html#menu">
+        <label class="visually-hidden" for="site-search">
+          Buscar productos
+        </label>
+
+        <input id="site-search"
+               type="search"
+               placeholder="Buscar..."
+               autocomplete="off">
+
+        <button type="submit" aria-label="Buscar">
+          <img src="/iconos/lupa-13.png" alt="">
+        </button>
+      </form>
+
+      <a class="nav-item cart-link" href="#favoritos"
+         aria-label="Ir a comprar">
+        <img src="/iconos/carrito.png" alt="" class="nav-icon">
+        <span>COMPRAR</span>
+      </a>
+
+    </nav>
+  </header>
+
+
+  <!-- ==================================================
+       CONTENIDO PRINCIPAL DE RESERVACIONES
+       ================================================== -->
+
+  <main class="reservacion-page">
+
+    <!-- Barra de navegación de los tres pasos -->
+    <nav class="reservacion-progreso"
+         aria-label="Progreso de la reservación">
+
+      <div class="reservacion-ruta">
+        <div id="reservacion-progreso-relleno"></div>
+      </div>
+
+      <button class="reservacion-paso activo"
+              type="button"
+              data-paso="1"
+              aria-current="step">
+        <span>1</span>
+        <b>Datos</b>
+      </button>
+
+      <button class="reservacion-paso"
+              type="button"
+              data-paso="2">
+        <span>2</span>
+        <b>Reservar</b>
+      </button>
+
+      <button class="reservacion-paso"
+              type="button"
+              data-paso="3">
+        <span>3</span>
+        <b>Pagar</b>
+      </button>
+
+    </nav>
+
+
+    <!-- ==================================================
+         PASO 1: CALENDARIO Y DATOS DEL CLIENTE
+         ================================================== -->
+
+    <section id="reservacion-pantalla-1"
+             class="reservacion-pantalla">
+
+      <h1>Fecha de reservación</h1>
+
+      <p class="reservacion-subtitulo">
+        Seleccione la fecha que va a reservar.
+      </p>
+
+      <form id="reservacion-formulario" novalidate>
+
+        <div class="reservacion-columnas">
+
+          <!-- Calendario -->
+          <section class="reservacion-calendario"
+                   aria-label="Seleccionar fecha">
+
+            <header class="reservacion-calendario-cabecera">
+
+              <button id="reservacion-mes-anterior"
+                      type="button"
+                      aria-label="Mes anterior">
+                ‹
+              </button>
+
+              <h2 id="reservacion-mes-titulo">Mes Año</h2>
+
+              <button id="reservacion-mes-siguiente"
+                      type="button"
+                      aria-label="Mes siguiente">
+                ›
+              </button>
+
+            </header>
+
+            <!-- Días de la semana -->
+            <div class="reservacion-dias-semana">
+              <span>DO</span>
+              <span>LU</span>
+              <span>MA</span>
+              <span>MI</span>
+              <span>JU</span>
+              <span>VI</span>
+              <span>SA</span>
+            </div>
+
+            <!-- JavaScript dibuja los días -->
+            <div id="reservacion-dias"
+                 class="reservacion-dias">
+            </div>
+
+            <p class="reservacion-ayuda-calendario">
+              Selecciona un día futuro disponible.
+            </p>
+
+          </section>
+
+
+          <!-- Formulario de datos personales -->
+          <div class="reservacion-campos">
+
+            <input type="hidden"
+                   id="reservacionFecha"
+                   name="reservacionFecha">
+
+            <label for="reservacionNombre">
+              Nombre y Apellidos:
+            </label>
+
+            <input type="text"
+                   id="reservacionNombre"
+                   name="reservacionNombre"
+                   autocomplete="name"
+                   required>
+
+            <label for="reservacionCorreo">
+              Correo electrónico:
+            </label>
+
+            <input type="email"
+                   id="reservacionCorreo"
+                   name="reservacionCorreo"
+                   autocomplete="email"
+                   required>
+
+            <label for="reservacionCedula">
+              Cédula:
+            </label>
+
+            <input type="text"
+                   id="reservacionCedula"
+                   name="reservacionCedula"
+                   inputmode="numeric"
+                   maxlength="15"
+                   required>
+
+            <label for="reservacionCelular">
+              Celular - WhatsApp:
+            </label>
+
+            <input type="tel"
+                   id="reservacionCelular"
+                   name="reservacionCelular"
+                   inputmode="tel"
+                   required>
+
+            <label for="reservacionHora">
+              Hora de la reserva:
+            </label>
+
+            <select id="reservacionHora"
+                    name="reservacionHora"
+                    required>
+
+              <option value="">Selecciona una hora</option>
+              <option>12:00 p. m.</option>
+              <option>1:00 p. m.</option>
+              <option>2:00 p. m.</option>
+              <option>3:00 p. m.</option>
+              <option>4:00 p. m.</option>
+              <option>5:00 p. m.</option>
+              <option>6:00 p. m.</option>
+              <option>7:00 p. m.</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <!-- Mensajes de validación -->
+        <p id="reservacion-mensaje"
+           class="reservacion-mensaje"
+           role="alert">
+        </p>
+
+        <div class="reservacion-acciones centrado">
+          <button class="reservacion-boton" type="submit">
+            SIGUIENTE
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+
+    <!-- ==================================================
+         PASO 2: RESUMEN Y CANTIDAD DE PERSONAS
+         ================================================== -->
+
+    <section id="reservacion-pantalla-2"
+             class="reservacion-pantalla"
+             hidden>
+
+      <h1>Datos</h1>
+
+      <div class="reservacion-resumen-grid">
+
+        <!-- Resumen del cliente -->
+        <div class="reservacion-resumen-datos">
+
+          <p>
+            <strong>Fecha de visita:</strong>
+            <span id="reservacion-resumen-fecha">—</span>
+          </p>
+
+          <p>
+            <strong>Nombre y Apellidos:</strong>
+            <span id="reservacion-resumen-nombre">—</span>
+          </p>
+
+          <p>
+            <strong>Correo Electrónico:</strong>
+            <span id="reservacion-resumen-correo">—</span>
+          </p>
+
+          <p>
+            <strong>Cédula:</strong>
+            <span id="reservacion-resumen-cedula">—</span>
+          </p>
+
+          <p>
+            <strong>Celular - WhatsApp:</strong>
+            <span id="reservacion-resumen-celular">—</span>
+          </p>
+
+        </div>
+
+
+        <!-- Contador y precio -->
+        <aside class="reservacion-calculo">
+
+          <h2>Cantidad de personas</h2>
+
+          <div class="reservacion-contador">
+
+            <button id="reservacion-restar"
+                    type="button"
+                    aria-label="Restar persona">
+              −
+            </button>
+
+            <output id="reservacion-personas">1</output>
+
+            <button id="reservacion-sumar"
+                    type="button"
+                    aria-label="Agregar persona">
+              +
+            </button>
+
+          </div>
+
+          <p id="reservacion-maximo">Máximo 6 personas</p>
+
+          <h2>Monto de la reserva</h2>
+
+          <output id="reservacion-total"
+                  class="reservacion-total">
+            $10.000
+          </output>
+
+          <p>$10.000 COP por persona</p>
+
+        </aside>
+
+      </div>
+
+      <p id="reservacion-mensaje-resumen"
+         class="reservacion-mensaje"
+         role="alert">
+      </p>
+
+      <div class="reservacion-acciones doble">
+
+        <button class="reservacion-boton"
+                id="reservacion-anterior"
+                type="button">
+          ANTERIOR
+        </button>
+
+        <button class="reservacion-boton"
+                id="reservacion-confirmar"
+                type="button">
+          SIGUIENTE
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         PASO 3: RECIBO VINTAGE DE ROCK AND FOOD
+         ESTE ES EL ÚNICO PASO CON NUEVO DISEÑO.
+         ================================================== -->
+
+    <section id="reservacion-pantalla-3"
+             class="reservacion-pantalla"
+             hidden>
+
+      <!-- Papel envejecido estilo factura de diner -->
+      <article class="recibo-vintage">
+
+        <!-- Cabecera del recibo -->
+        <header class="recibo-vintage__encabezado">
+
+          <div class="recibo-vintage__marca" aria-label="Rock and Food">
+            <span>R</span><span>F</span>
+          </div>
+
+          <div class="recibo-vintage__titulo">
+            <p>ROCK AND FOOD</p>
+            <h2>Reserva</h2>
+            <span>COMPROBANTE DE VISITA</span>
+          </div>
+
+          <div class="recibo-vintage__sello">
+            DINER<br>CLUB
+          </div>
+
+        </header>
+
+        <div class="recibo-vintage__linea"></div>
+
+        <!-- Datos de la reserva: conectados al JavaScript -->
+        <div class="recibo-vintage__informacion">
+
+          <p>
+            <strong>Fecha de visita:</strong>
+            <span id="reservacion-final-fecha">—</span>
+          </p>
+
+          <p>
+            <strong>Hora:</strong>
+            <span id="reservacion-final-hora">—</span>
+          </p>
+
+          <p>
+            <strong>Nombre:</strong>
+            <span id="reservacion-final-nombre">—</span>
+          </p>
+
+          <p>
+            <strong>Personas:</strong>
+            <span id="reservacion-final-personas">1</span>
+          </p>
+
+        </div>
+
+        <div class="recibo-vintage__linea recibo-vintage__linea--punteada"></div>
+
+        <!-- Total calculado automáticamente -->
+        <div class="recibo-vintage__total">
+          <span>TOTAL DE LA RESERVA</span>
+          <strong id="reservacion-final-total">$10.000 COP</strong>
+        </div>
+
+        <div class="recibo-vintage__linea"></div>
+
+        <p class="recibo-vintage__gracias">
+          Tu confianza significa todo para nosotros
+        </p>
+
+        <p class="recibo-vintage__pie">
+          ROCK AND FOOD · BOGOTÁ<br>
+          GRACIAS POR TU VISITA
+        </p>
+
+      </article>
+
+      <!-- Aviso de demostración -->
+      <p class="recibo-vintage__aviso">
+        Esta es una confirmación demostrativa.
+        No se ha realizado ningún cobro ni se ha guardado
+        la reserva en un servidor.
+      </p>
+
+      <!-- Botón original para repetir la reservación -->
+      <div class="reservacion-acciones centrado">
+
+        <button id="reservacion-reiniciar"
+                class="reservacion-boton"
+                type="button">
+          HACER OTRA RESERVA
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ==================================================
+       PIE DE PÁGINA ORIGINAL
+       ================================================== -->
+
+  <footer class="reservacion-footer" id="reservacion-footer">
+
+    <a href="index.html" class="reservacion-logo">
+      <img src="assets/logo-footer.png" alt="Rock and Food">
+    </a>
+
+    <div>
+      <h2>Encuéntranos</h2>
+      <a href="#reservacion-footer">Dirección del restaurante.</a>
+      <a href="#reservacion-footer">Horarios de atención.</a>
+      <a href="tel:+573123391929">Teléfono o WhatsApp.</a>
+      <a href="https://maps.google.com/?q=Bogota">
+        Enlace a Google Maps.
+      </a>
+    </div>
+
+    <div>
+      <h2>Explora nuestro menú</h2>
+      <a href="index.html#menu">Menú principal.</a>
+      <a href="index.html#favoritos">Nuestros favoritos.</a>
+      <a href="index.html#favoritos">Combos.</a>
+    </div>
+
+    <div>
+      <h2>Servicio al cliente</h2>
+      <a href="#reservacion-footer">Preguntas frecuentes.</a>
+      <a href="#reservacion-footer">Domicilios y cobertura.</a>
+      <a href="#reservacion-footer">Métodos de pago.</a>
+    </div>
+
+    <div>
+      <h2>Síguenos</h2>
+      <a href="#">Instagram.</a>
+      <a href="#">Facebook.</a>
+      <a href="#">TikTok.</a>
+    </div>
+
+  </footer>
+
+  <!-- Mantener el JavaScript original -->
+  <script src="reservacion.js"></script>
+
+</body>
+</html>

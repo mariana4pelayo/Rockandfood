@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Menú | Rock and Food</title>
+
+  <!-- Conexión con los estilos CSS -->
+  <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+  <!-- ==========================================
+       BARRA DE NAVEGACIÓN
+       ========================================== -->
+
+  <header class="site-header" id="inicio">
+    <nav class="navbar" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Rock and Food, inicio">
+        <img src="/iconos/logo-14.png" alt="Rock and Food">
+      </a>
+
+      <a class="nav-item" href="menu.html" aria-label="Ir al menú">
+        <img src="/iconos/menu.png" alt="" class="nav-icon">
+        <span>MENÚ</span>
+      </a>
+
+      <a class="nav-item" href="reservacion.html" aria-label="Ir a reservas">
+        <img src="/iconos/reserva.png" alt="" class="nav-icon">
+        <span>RESERVA</span>
+      </a>
+
+      <a class="nav-item" href="#usuario" aria-label="Área de usuario">
+        <img src="/iconos/usuario.png" alt="" class="nav-icon">
+        <span>USUARIO</span>
+      </a>
+
+      <!-- La búsqueda ocupa un espacio amplio en la navegación -->
+      <form class="search-form" role="search" action="#menu">
+        <label class="visually-hidden" for="site-search">Buscar productos</label>
+        <input id="site-search" type="search" placeholder="Buscar..." autocomplete="off">
+        <button type="submit" aria-label="Buscar">
+          <img src="/iconos/lupa-13.png" alt="">
+        </button>
+      </form>
+
+      
+        <button class="boton-carrito" id="abrir-carrito" type="button">
+        <img src="/iconos/carrito.png" alt="" class="nav-icon">
+        <span>COMPRAR</span>
+        <span class="carrito-contador" id="carrito-contador"
+              aria-live="polite">0</span>
+      </button>
+    </nav>
+  </header>
+
+
+  <!-- ==========================================
+       CONTENIDO PRINCIPAL
+       ========================================== -->
+
+  <main id="inicio">
+
+    <section class="presentacion">
+      <p class="presentacion-etiqueta">ROCK AND FOOD · MENÚ</p>
+      <h1>¡El sabor que te mueve!</h1>
+      <p>Elige tus favoritos y agrégalos al carrito.</p>
+    </section>
+
+
+    <!-- ========================================
+         CATEGORÍA 1: HAMBURGUESAS
+         Los productos se crean desde JavaScript.
+         ======================================== -->
+
+    <section class="categoria" id="hamburguesas"
+             data-categoria="hamburguesas">
+
+      <div class="categoria-titulo">
+        <div>
+          <span class="categoria-etiqueta">NUESTROS FAVORITOS</span>
+          <h2>Hamburguesas</h2>
+        </div>
+        <span class="categoria-numero">01 / MENÚ</span>
+      </div>
+
+      <div class="franja-ajedrez franja-mostaza" aria-hidden="true"></div>
+
+      <div class="carrusel-contenedor">
+
+        <button class="flecha flecha-anterior"
+                type="button"
+                aria-label="Ver hamburguesas anteriores">
+          &#10094;
+        </button>
+
+        <div class="carrusel-ventana">
+          <div class="productos-pista" id="pista-hamburguesas"></div>
+        </div>
+
+        <button class="flecha flecha-siguiente"
+                type="button"
+                aria-label="Ver más hamburguesas">
+          &#10095;
+        </button>
+
+      </div>
+
+      <div class="carrusel-pie">
+        <span class="carrusel-posicion">01 — 07</span>
+        <span>Desliza para descubrir más sabores</span>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         CATEGORÍA 2: PIZZAS
+         ======================================== -->
+
+    <section class="categoria categoria-roja" id="pizzas"
+             data-categoria="pizzas">
+
+      <div class="categoria-titulo">
+        <div>
+          <span class="categoria-etiqueta">RECIÉN PREPARADAS</span>
+          <h2>Pizzas</h2>
+        </div>
+        <span class="categoria-numero">02 / MENÚ</span>
+      </div>
+
+      <div class="franja-ajedrez franja-roja" aria-hidden="true"></div>
+
+      <div class="carrusel-contenedor">
+
+        <button class="flecha flecha-anterior"
+                type="button"
+                aria-label="Ver pizzas anteriores">
+          &#10094;
+        </button>
+
+        <div class="carrusel-ventana">
+          <div class="productos-pista" id="pista-pizzas"></div>
+        </div>
+
+        <button class="flecha flecha-siguiente"
+                type="button"
+                aria-label="Ver más pizzas">
+          &#10095;
+        </button>
+
+      </div>
+
+      <div class="carrusel-pie">
+        <span class="carrusel-posicion">01 — 07</span>
+        <span>Encuentra tu pizza favorita</span>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         CATEGORÍA 3: BEBIDAS
+         ======================================== -->
+
+    <section class="categoria" id="bebidas"
+             data-categoria="bebidas">
+
+      <div class="categoria-titulo">
+        <div>
+          <span class="categoria-etiqueta">PARA ACOMPAÑAR</span>
+          <h2>Bebidas</h2>
+        </div>
+        <span class="categoria-numero">03 / MENÚ</span>
+      </div>
+
+      <div class="franja-ajedrez franja-mostaza" aria-hidden="true"></div>
+
+      <div class="carrusel-contenedor">
+
+        <button class="flecha flecha-anterior"
+                type="button"
+                aria-label="Ver bebidas anteriores">
+          &#10094;
+        </button>
+
+        <div class="carrusel-ventana">
+          <div class="productos-pista" id="pista-bebidas"></div>
+        </div>
+
+        <button class="flecha flecha-siguiente"
+                type="button"
+                aria-label="Ver más bebidas">
+          &#10095;
+        </button>
+
+      </div>
+
+      <div class="carrusel-pie">
+        <span class="carrusel-posicion">01 — 07</span>
+        <span>Una bebida para cada momento</span>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         CATEGORÍA 4: PERROS CALIENTES
+         ======================================== -->
+
+    <section class="categoria categoria-roja" id="perros"
+             data-categoria="perros">
+
+      <div class="categoria-titulo">
+        <div>
+          <span class="categoria-etiqueta">CLÁSICOS DEL DINER</span>
+          <h2>Perros calientes</h2>
+        </div>
+        <span class="categoria-numero">04 / MENÚ</span>
+      </div>
+
+      <div class="franja-ajedrez franja-roja" aria-hidden="true"></div>
+
+      <div class="carrusel-contenedor">
+
+        <button class="flecha flecha-anterior"
+                type="button"
+                aria-label="Ver perros calientes anteriores">
+          &#10094;
+        </button>
+
+        <div class="carrusel-ventana">
+          <div class="productos-pista" id="pista-perros"></div>
+        </div>
+
+        <button class="flecha flecha-siguiente"
+                type="button"
+                aria-label="Ver más perros calientes">
+          &#10095;
+        </button>
+
+      </div>
+
+      <div class="carrusel-pie">
+        <span class="carrusel-posicion">01 — 07</span>
+        <span>Más opciones, más sabor</span>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ==========================================
+       VENTANA DEL CARRITO
+       ========================================== -->
+
+  <div class="fondo-modal" id="fondo-modal" hidden>
+    <section class="modal-carrito"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="titulo-carrito">
+
+      <button class="cerrar-modal" id="cerrar-carrito"
+              type="button" aria-label="Cerrar carrito">×</button>
+
+      <span class="categoria-etiqueta">TU PEDIDO</span>
+      <h2 id="titulo-carrito">Mi carrito</h2>
+
+      <div id="carrito-lista" class="carrito-lista"></div>
+
+      <div class="carrito-total">
+        <span>Total</span>
+        <strong id="carrito-total">$0 COP</strong>
+      </div>
+
+      <button class="boton-vaciar" id="vaciar-carrito" type="button">
+        Vaciar carrito
+      </button>
+
+      <p class="nota-carrito">
+        Este carrito es una demostración visual. No procesa pagos.
+      </p>
+
+    </section>
+  </div>
+
+
+  <!-- Mensajes que aparecen al comprar o dar like -->
+  <div class="notificacion" id="notificacion"
+       role="status" aria-live="polite"></div>
+
+
+  <!-- ==========================================
+       PIE DE PÁGINA
+       ========================================== -->
+
+  <footer class="pie-pagina">
+    <a class="logo logo-pie" href="#inicio">
+      <span>Rock <small>and</small> Food</span>
+    </a>
+
+    <div>
+      <h3>Encuéntranos</h3>
+      <a href="#inicio">Nuestro restaurante</a>
+      <a href="#reservas">Reservaciones</a>
+    </div>
+
+    <div>
+      <h3>Explora nuestro menú</h3>
+      <a href="#hamburguesas">Hamburguesas</a>
+      <a href="#pizzas">Pizzas</a>
+      <a href="#bebidas">Bebidas</a>
+      <a href="#perros">Perros calientes</a>
+    </div>
+
+    <div>
+      <h3>Servicio al cliente</h3>
+      <a href="#inicio">Contáctanos</a>
+      <a href="#inicio">Preguntas frecuentes</a>
+    </div>
+
+  </footer>
+
+
+  <!-- Conexión con el archivo JavaScript -->
+  <script src="menu.js"></script>
+
+</body>
+</html>

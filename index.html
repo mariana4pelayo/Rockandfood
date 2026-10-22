@@ -5,26 +5,33 @@
   <!-- Permite que la página se adapte al ancho de celulares y tabletas -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Rock and Food: combos, hamburguesas y favoritos con estilo retro diner.">
-  <title>Rock and Food | Diner 80s</title>
+  <title>Rock and Food </title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="reservacion.css">
+  <link rel="stylesheet" href="menu.css">
+
+  
+
 </head>
 <body>
   <!-- ==================== NAVEGACIÓN ====================
        Los seis espacios se controlan con CSS Grid.
        Cambia assets/logo.png y los iconos por tus imágenes.
   -->
+
+  
   <header class="site-header" id="inicio">
     <nav class="navbar" aria-label="Navegación principal">
       <a class="brand" href="#inicio" aria-label="Rock and Food, inicio">
         <img src="/iconos/logo-14.png" alt="Rock and Food">
       </a>
 
-      <a class="nav-item" href="#menu" aria-label="Ir al menú">
+      <a class="nav-item" href="menu.html" aria-label="Ir al menú">
         <img src="/iconos/menu.png" alt="" class="nav-icon">
         <span>MENÚ</span>
       </a>
 
-      <a class="nav-item" href="#reserva" aria-label="Ir a reservas">
+      <a class="nav-item" href="/reservacion.html" aria-label="Ir a reservas">
         <img src="/iconos/reserva.png" alt="" class="nav-icon">
         <span>RESERVA</span>
       </a>
@@ -139,10 +146,27 @@
 
     <!-- Segunda franja de cuadros y título superpuesto -->
     <section class="favorites-section" id="favoritos" aria-labelledby="favorites-title">
-      <div class="favorites-heading">
-        <div class="checker-strip checker-strip-heading" aria-hidden="true"></div>
-        <h2 id="favorites-title">Nuestros favoritos</h2>
+      <div class="categoria-titulo">
+        <div>
+          
+          <h2>Favoritos</h2>
+        </div>
+        <span class="categoria-numero">02 / MENÚ</span>
       </div>
+
+      <div class="franja-ajedrez franja-roja" aria-hidden="true"></div>
+    
+
+          
+
+      
+
+     
+
+
+
+    </section>
+
 
       <!-- JavaScript cambia las tarjetas visibles al presionar las flechas -->
       <div class="carousel-shell">
@@ -242,5 +266,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="menu.js"></script>
+
 </body>
 </html>

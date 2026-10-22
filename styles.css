@@ -1,28 +1,12 @@
 /* ==========================================================
-   ROCK AND FOOD — HOJA DE ESTILOS
-   Los comentarios indican qué puedes modificar.
-   Colores principales tomados de la referencia:
-   mostaza #e4b746, rojo #a30e12 y crema #fffaf0.
+  ROCK AND FOOD — HOJA DE ESTILOS
+  Los comentarios indican qué puedes modificar.
+  Colores principales tomados de la referencia:
+  mostaza #e4b746, rojo #a30e12 y crema #fffaf0.
    ========================================================== */
 
 /*tipografia*/
 
-@import url('https://fonts.googleapis.com/css2?family=Modak&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-.modak-regular {
-  font-family: "Modak", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
-// <weight>: Use a value from 100 to 900
-// <uniquifier>: Use a unique and descriptive class name
-.montserrat-lith {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 100;
-  font-style: italic;
-}
 :root {
   --mustard: #e4b746;
   --red: #a30e12;
